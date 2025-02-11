@@ -14,7 +14,6 @@
   "dependencies": {
     "cheerio": "^1.0.0",
     "elysia": "latest",
-    "puppeteer": "^24.2.0",
     "undici": "^7.3.0"
   },
   "devDependencies": {
