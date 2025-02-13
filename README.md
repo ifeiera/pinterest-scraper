@@ -1,6 +1,16 @@
-# Pinterest Image Downloader API
+<br />
+<div align="center">
+  <a href="https://github.com/ifeiera/pinterest-scraper">
+    <img src="https://i.pinimg.com/736x/4e/2c/e4/4e2ce4f48dc8a7151fb82b13174626d1.jpg" alt="Logo" width="80" height="80">
+  </a>
 
-This is a simple API for downloading Pinterest images in their best quality. Created because Pinterest's default download is absolute garbage - giving you potato quality images and sometimes random non-image files. What the hell, right?
+  <h3 align="center">Pinterest Image Downloader API</h3>
+
+  <p align="center">
+    This is a simple API for downloading Pinterest images in their best quality. Created because Pinterest's default download is absolute garbage - giving you potato quality images        and sometimes random non-image files.
+  </p>
+  </br>
+</div>
 
 ## Why This Exists?
 Let's face it - Pinterest's default download feature sucks. It's frustrating as hell when you find that perfect image, hit download, and get some crappy low-res version instead of the crisp, high-quality original. This API fixes that BS by always fetching the best possible version of any Pinterest image.
