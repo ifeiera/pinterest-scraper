@@ -85,3 +85,8 @@ bun run start
 The server will start at `http://localhost:3000` by default. To use different settings, configure these environment variables:
 - `PORT` - Change the port (default: 3000)
 - `HOST` - Change the host (default: 0.0.0.0)
+
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
