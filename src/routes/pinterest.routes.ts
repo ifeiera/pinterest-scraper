@@ -3,9 +3,11 @@ import { PinterestService } from "../services/pinterest.service";
 
 const pinterestService = new PinterestService();
 
+// Available image size options for Pinterest images
 type ImageSize = "hd" | "x236" | "x474" | "x736";
 
 const pinterestRoutes = new Elysia()
+	// Get Pinterest pin details by ID
 	.get("/pin/:id", async ({ params }) => {
 		try {
 			return {
@@ -15,10 +17,11 @@ const pinterestRoutes = new Elysia()
 		} catch {
 			return {
 				status: 500,
-				error: "Gagal mengambil detail pin",
+				error: "Failed to get pin details",
 			};
 		}
 	})
+	// Download Pinterest image with optional size parameter
 	.get(
 		"/pin/:id/download",
 		async ({ params, query }) => {
@@ -28,9 +31,11 @@ const pinterestRoutes = new Elysia()
 					query.size as ImageSize | undefined,
 				);
 
+				// Fetch and stream the image
 				const response = await fetch(url);
 				if (!response.ok) throw new Error("Gagal mengunduh gambar");
 
+				// Return image with proper headers for download
 				return new Response(await response.arrayBuffer(), {
 					headers: {
 						"Content-Type": contentType,
@@ -41,12 +46,13 @@ const pinterestRoutes = new Elysia()
 				});
 			} catch (error) {
 				return new Response(
-					`Gagal mengunduh gambar: ${error instanceof Error ? error.message : "Unknown error"}`,
+					`Failed to download image: ${error instanceof Error ? error.message : "Unknown error"}`,
 					{ status: 500 },
 				);
 			}
 		},
 		{
+			// Validate size query parameter
 			query: t.Object({
 				size: t.Optional(
 					t.Union([

@@ -6,8 +6,10 @@ type ImageSize = "hd" | "x236" | "x474" | "x736";
 type ImageResponse = { url: string; contentType: string };
 
 export class PinterestService {
+	// Browser user agent
 	private static readonly USER_AGENT = "Mozilla/5.0 Chrome/91.0.4472.124";
 
+	// Fetch and parse Pinterest pin details from the webpage
 	async getPinDetails(pinId: string): Promise<PinDetails> {
 		const $ = cheerio.load(
 			await (
@@ -17,15 +19,17 @@ export class PinterestService {
 			).text(),
 		);
 
+		// Find the main image by looking for 736x size in src
 		const mainImg = $('img[src*="/736x/"]').first();
 		const src = mainImg.attr("src");
 		if (!mainImg.length || !src) {
-			throw new Error("Gambar tidak ditemukan");
+			throw new Error("Image not found");
 		}
 
+		// Extract image URL components for different sizes
 		const match = src.match(/(.*\/)\d+x\/(.+)\.(.+)/);
 		if (!match) {
-			throw new Error("Format URL tidak valid");
+			throw new Error("Invalid URL format");
 		}
 
 		const [, prefix, baseName, ext] = match;
@@ -49,13 +53,15 @@ export class PinterestService {
 		};
 	}
 
+	// Get image URL and content type for specified size
 	async getPinImageUrl(
 		pinId: string,
 		size?: ImageSize,
 	): Promise<ImageResponse> {
 		const details = await this.getPinDetails(pinId);
-		if (!details.mainImage?.srcset) throw new Error("Gambar tidak ditemukan");
+		if (!details.mainImage?.srcset) throw new Error("Image not found");
 
+		// For HD/original size, try both jpg and png formats
 		if (!size || size === "hd") {
 			for (const url of details.mainImage.srcset.original) {
 				const result = await this.validateImageUrl(url);
@@ -67,6 +73,7 @@ export class PinterestService {
 		return this.getImageBySize(details.mainImage.srcset, size);
 	}
 
+	// Check if image URL is accessible and returns valid content type
 	private async validateImageUrl(url: string): Promise<ImageResponse | null> {
 		try {
 			const response = await fetch(url, { method: "HEAD" });
@@ -80,15 +87,16 @@ export class PinterestService {
 		return null;
 	}
 
+	// Get image URL for specific thumbnail size
 	private async getImageBySize(
 		srcset: NonNullable<PinDetails["mainImage"]>["srcset"],
 		size: Exclude<ImageSize, "hd">,
 	): Promise<ImageResponse> {
 		const url = srcset[size];
-		if (!url) throw new Error(`Ukuran gambar ${size} tidak tersedia`);
+		if (!url) throw new Error(`Image size ${size} not available`);
 
 		const response = await fetch(url, { method: "HEAD" });
-		if (!response.ok) throw new Error(`Gagal mengakses gambar ukuran ${size}`);
+		if (!response.ok) throw new Error(`Failed to access image size ${size}`);
 
 		return {
 			url,
@@ -97,6 +105,7 @@ export class PinterestService {
 		};
 	}
 
+	// Validate image content type matches file extension
 	private isValidContentType(url: string, contentType: string | null): boolean {
 		return (
 			(url.endsWith(".jpg") && contentType?.includes("jpeg")) ||
@@ -105,6 +114,7 @@ export class PinterestService {
 		);
 	}
 
+	// Get default content type based on file extension
 	private getContentType(url: string): string {
 		return url.endsWith(".png") ? "image/png" : "image/jpeg";
 	}

@@ -1,15 +1,77 @@
-# Elysia with Bun runtime
+# Pinterest Image Downloader API
+
+This is a simple API for downloading Pinterest images in their best quality. Created because Pinterest's default download is absolute garbage - giving you potato quality images and sometimes random non-image files. What the hell, right?
+
+## Why This Exists?
+Let's face it - Pinterest's default download feature sucks. It's frustrating as hell when you find that perfect image, hit download, and get some crappy low-res version instead of the crisp, high-quality original. This API fixes that BS by always fetching the best possible version of any Pinterest image.
+
+This API was specifically built to power the [Pinterest Downloader Extension](repository-url-here) - a browser extension that makes downloading high-quality Pinterest images actually bearable. Check out the extension repo for the complete solution!
+
+## Features
+- 🔍 Get complete Pinterest pin details
+- 📥 Download images in various sizes:
+  - HD/Original quality (best quality available)
+  - 736x resolution (large)
+  - 474x resolution (medium)
+  - 236x resolution (small)
+
+> **⚠️ Current Limitations**: 
+> - Only works with single-image pins
+> - No support for video pins
+> - No support for carousel/slider pins
+> - No support for GIFs or animated content
+>
+> These features might be added when there's time and energy to deal with Pinterest's messy HTML structure. No promises though! 🤷
+
+## API Endpoints
+
+### Get Pin Details
+```
+GET /pin/:id
+```
+Returns all available information about a Pinterest pin, including all possible image URLs.
+
+### Download Image
+```
+GET /pin/:id/download
+GET /pin/:id/download?size=[size]
+```
+Downloads the image in the specified size. The size parameter is optional - without it, the API will try to get the HD/original version. If that's not available, it'll fall back to the next best quality (because that's how it should work).
+
+Available sizes:
+- `hd` (default) - Original/highest quality
+- `x736` - Large thumbnail
+- `x474` - Medium thumbnail
+- `x236` - Small thumbnail (why would you even want this?)
+
+> **Note about HD/Original quality**: The final image quality depends on what was uploaded to Pinterest. If someone uploaded a potato quality image, there's no magic wand to make it HD. The API will get you the best version available, but can't fix what's already broken.
 
 ## Getting Started
-To get started with this template, simply paste this command into your terminal:
+
+### Prerequisites
+- [Bun](https://bun.sh) runtime installed on your system
+
+### Quick Setup
 ```bash
-bun create elysia ./elysia-example
+# Clone the repository
+git clone [repository-url]
+
+# Install dependencies
+bun install
 ```
 
-## Development
-To start the development server run:
+### Running the Server
+
+For development (with hot reload):
 ```bash
 bun run dev
 ```
 
-Open http://localhost:3000/ with your browser to see the result.
+For production:
+```bash
+bun run start
+```
+
+The server will start at `http://localhost:3000` by default. To use different settings, configure these environment variables:
+- `PORT` - Change the port (default: 3000)
+- `HOST` - Change the host (default: 0.0.0.0)

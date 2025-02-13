@@ -1,17 +1,15 @@
 {
-  "name": "ariatoolsapi",
-  "version": "1.0.50",
+  "name": "pinterest-api",
+  "version": "1.0.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun --watch run src/index.ts",
     "start": "bun run src/index.ts",
     "docker:build": "docker build -t pinterest-scraper .",
-    "docker:run": "docker run -p 3000:3000 pinterest-scraper",
-    "docker:up": "docker compose up -d",
-    "docker:down": "docker compose down",
-    "docker:logs": "docker compose logs -f"
+    "docker:run": "docker run -p 3000:3000 pinterest-scraper"
   },
   "dependencies": {
+    "@tqman/nice-logger": "^1.1.1",
     "cheerio": "^1.0.0",
     "elysia": "latest",
     "undici": "^7.3.0"
