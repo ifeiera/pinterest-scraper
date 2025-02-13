@@ -1,21 +1,23 @@
 {
-  "name": "pinterest-api",
-  "version": "1.0.0",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun --watch run src/index.ts",
-    "start": "bun run src/index.ts",
-    "docker:build": "docker build -t pinterest-scraper .",
-    "docker:run": "docker run -p 3000:3000 pinterest-scraper"
-  },
-  "dependencies": {
-    "@tqman/nice-logger": "^1.1.1",
-    "cheerio": "^1.0.0",
-    "elysia": "latest",
-    "undici": "^7.3.0"
-  },
-  "devDependencies": {
-    "bun-types": "latest"
-  },
-  "module": "src/index.js"
+	"name": "pinterest-api",
+	"version": "1.0.0",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "bun --watch run src/index.ts",
+		"start": "bun run src/index.ts",
+		"check": "biome check --write",
+		"docker:build": "docker build -t pinterest-scraper .",
+		"docker:run": "docker run -p 3000:3000 pinterest-scraper"
+	},
+	"dependencies": {
+		"@tqman/nice-logger": "^1.1.1",
+		"cheerio": "^1.0.0",
+		"elysia": "latest",
+		"undici": "^7.3.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"bun-types": "latest"
+	},
+	"module": "src/index.js"
 }

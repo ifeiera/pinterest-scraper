@@ -1,5 +1,5 @@
-import { fetch } from "undici";
 import * as cheerio from "cheerio";
+import { fetch } from "undici";
 import type { PinDetails } from "../schemas/pinterest.schema";
 
 type ImageSize = "hd" | "x236" | "x474" | "x736";
