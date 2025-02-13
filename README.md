@@ -21,7 +21,7 @@ This API was specifically built to power the [Pinterest Downloader Extension](re
 > - No support for carousel/slider pins
 > - No support for GIFs or animated content
 >
-> These features might be added when there's time and energy to deal with Pinterest's messy HTML structure. No promises though! 🤷
+> These features might be added when there's time and energy to deal with Pinterest's messy HTML structure.
 
 ## API Endpoints
 
