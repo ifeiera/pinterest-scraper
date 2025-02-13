@@ -13,7 +13,7 @@ This is a simple API for downloading Pinterest images in their best quality. Cre
 ## Why This Exists?
 Let's face it - Pinterest's default download feature sucks. It's frustrating as hell when you find that perfect image, hit download, and get some crappy low-res version instead of the crisp, high-quality original. This API fixes that BS by always fetching the best possible version of any Pinterest image.
 
-This API was specifically built to power the [Pinterest Downloader Extension](repository-url-here) - a browser extension that makes downloading high-quality Pinterest images actually bearable. Check out the extension repo for the complete solution!
+This API was specifically built to power the [Pinterest Downloader Extension](https://github.com/ifeiera/pinterest-downloader) - a browser extension that makes downloading high-quality Pinterest images actually bearable. Check out the extension repo for the complete solution!
 
 ## Features
 - 🔍 Get complete Pinterest pin details
