@@ -6,8 +6,8 @@ import pinterestRoutes from "./routes/pinterest.routes";
 const app = new Elysia()
 	.use(
 		logger({
-			mode: "live",
-			withTimestamp: true,
+			mode: "combined",
+			withTimestamp: false,
 		}),
 	)
 	.use(pinterestRoutes)

@@ -5,9 +5,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "bun --watch run src/index.ts",
 		"start": "bun run src/index.ts",
-		"check": "biome check --write",
-		"docker:build": "docker build -t pinterest-scraper .",
-		"docker:run": "docker run -p 3000:3000 pinterest-scraper"
+		"check": "biome check --write"
 	},
 	"dependencies": {
 		"@tqman/nice-logger": "^1.1.1",
