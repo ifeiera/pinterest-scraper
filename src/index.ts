@@ -1,32 +1,31 @@
 import { logger } from "@tqman/nice-logger";
 import { Elysia } from "elysia";
+import { config } from 'dotenv';
+import { cors } from '@elysiajs/cors'
 import pinterestRoutes from "./routes/pinterest.routes";
 
-// Setup Elysia app with logging middleware
-const app = new Elysia()
-	.use(
-		logger({
-			mode: "combined",
-			withTimestamp: false,
-		}),
-	)
-	.use(pinterestRoutes)
-	// Return empty response for favicon requests
-	.get("/favicon.ico", () => new Response(null, { status: 204 }));
+config();
 
-// Start the server
-const start = async () => {
-	const port = process.env.PORT ? Number(process.env.PORT) : 3000;
-	const hostname = process.env.HOST || "0.0.0.0";
+void startServer();
 
-	app.listen({
-		port,
-		hostname,
-	});
+async function startServer() {
+    const app = new Elysia()
+      .use(cors())
+      .use(
+        logger({
+          mode: 'combined',
+          withTimestamp: false,
+        }),
+      )
+      .use(pinterestRoutes)
+      .get('/favicon.ico', () => new Response(null, { status: 204 }))
+      .listen(3000);
 
-	console.log(
-		`🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`,
-	);
-};
+    console.log(`Pinterest Scraper is running at ${app.server?.hostname}:${app.server?.port}`);
 
-start();
+try {
+  } catch (error) {
+    console.error('Failed to start server:', error);
+    process.exit(1);
+  }
+}
